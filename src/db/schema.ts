@@ -1,5 +1,5 @@
 import {pgTable, serial, text, integer, timestamp, boolean, pgEnum, primaryKey} from 'drizzle-orm/pg-core';
-import {relations} from "drizzle-orm";
+import {InferSelectModel, relations} from "drizzle-orm";
 
 export const typeEnum = pgEnum('workout_type', ['AMRAP', 'EMOM', 'FOR_TIME', 'TABATA', 'STRENGTH'])
 
@@ -18,16 +18,21 @@ export const exercises = pgTable('exercises', {
     name: text('name').notNull().unique(),
 });
 
+export type Exercise = InferSelectModel<typeof exercises>;
+
 // Junction Tables
 export const workoutExercises = pgTable('workout_exercises', {
     workoutId: integer('workout_id').references(() => workouts.id).notNull(),
     exerciseId: integer('exercise_id').references(() => exercises.id).notNull(),
     reps: integer('reps'),
-    weight: integer('weight')
+    weight: integer('weight'),
+    createdAt: timestamp('created_at').defaultNow()
 }, (t) => ({
         pk: primaryKey({ columns : [t.workoutId, t.exerciseId] }),
     })
-    )
+);
+
+export type WorkoutExercises = InferSelectModel<typeof workoutExercises>;
 
 // Relationships
 export const workoutsRelations = relations(workouts, ({ many }) => ({
