@@ -26,7 +26,7 @@ export const workoutExercises = pgTable('workout_exercises', {
     exerciseId: integer('exercise_id').references(() => exercises.id).notNull(),
     reps: integer('reps'),
     weight: integer('weight'),
-    createdAt: timestamp('created_at').defaultNow()
+    createdAt: timestamp('created_at').defaultNow().notNull()
 }, (t) => ({
         pk: primaryKey({ columns : [t.workoutId, t.exerciseId] }),
     })
