@@ -1,6 +1,6 @@
 import { db } from '@/db';
 import { exercises } from '@/db/schema';
-import ExercisesPicker from '@/components/list/ExercisesPicker';
+import WodCreatorClient from "@/app/wod-creator/WodCreatorClient";
 
 export default async function WodCreatorPage() {
     const allExercises = await db.select().from(exercises);
@@ -8,9 +8,7 @@ export default async function WodCreatorPage() {
     return(
         <main>
             <h1>Wod Creator</h1>
-            <div>
-                <ExercisesPicker exercises={allExercises} />
-            </div>
+            <WodCreatorClient exercises={allExercises} />
         </main>
     )
 }

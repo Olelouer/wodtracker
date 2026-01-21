@@ -3,6 +3,11 @@ import {InferSelectModel, relations} from "drizzle-orm";
 
 export const typeEnum = pgEnum('workout_type', ['AMRAP', 'EMOM', 'FOR_TIME', 'TABATA', 'STRENGTH'])
 
+export const users = pgTable('users', {
+    id: serial('id').primaryKey(),
+    username: text('username').notNull()
+})
+
 export const workouts = pgTable('workouts', {
     id: serial('id').primaryKey(),
     // userId: text('user_id').notNull(),

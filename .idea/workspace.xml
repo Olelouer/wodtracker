@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f8b2586-7762-4cfc-8afc-c346ff8181d8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/wod-creator/WodCreatorClient.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/forms/WodForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/wod-creator/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/wod-creator/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/list/ExercisesPicker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/list/ExercisesPicker.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/db/schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/schema.ts" afterDir="false" />
     </list>
@@ -102,7 +104,9 @@
       <workItem from="1768498443485" duration="31000" />
       <workItem from="1768498572902" duration="3118000" />
       <workItem from="1768640148254" duration="8577000" />
-      <workItem from="1768743196676" duration="5149000" />
+      <workItem from="1768743196676" duration="5973000" />
+      <workItem from="1768930554830" duration="2177000" />
+      <workItem from="1769018318845" duration="4516000" />
     </task>
     <servers />
   </component>
