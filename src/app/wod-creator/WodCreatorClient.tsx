@@ -8,8 +8,24 @@ const WodCreatorClient = ({ exercises }: { exercises: Exercise[] }) => {
     const [selectedExercises, setSelectedExercises] = useState<WorkoutExercises[]>([]);
 
     const addExercise = (exercise: Exercise) => {
-        console.log(selectedExercises)
         setSelectedExercises([...selectedExercises, { workoutId : 1, exerciseId: exercise.id, weight: null, reps: null, createdAt: new Date()}]);
+    }
+
+    const removeSelectedExercise = (exercisePickedDate: Date) => {
+        setSelectedExercises(selectedExercises.filter(selectedExercise => {
+            const deletedExercise = exercisePickedDate.getTime() === selectedExercise.createdAt.getTime();
+            return !deletedExercise;
+        }));
+    }
+
+    const updateExercise = (exercisePickedDate: Date, field: string, value: number) => {
+        const newSelectedExercises = selectedExercises.map(exercise => {
+           if (exercisePickedDate.getTime() === exercise.createdAt.getTime()) {
+               return {...exercise, [field]: value};
+           }
+           return exercise;
+        });
+        setSelectedExercises(newSelectedExercises);
     }
 
     return (
@@ -22,6 +38,8 @@ const WodCreatorClient = ({ exercises }: { exercises: Exercise[] }) => {
                 <WodForm
                     workoutExercises={selectedExercises}
                     exercises={exercises}
+                    updateExerciseData={updateExercise}
+                    removeSelectedExercise={removeSelectedExercise}
                 />
             </div>
         </div>

@@ -1,18 +1,13 @@
 import {X} from "lucide-react";
 import {Exercise, WorkoutExercises} from '@/db/schema';
 
-const WodForm = ({ workoutExercises, exercises }: { workoutExercises: WorkoutExercises[], exercises: Exercise[]}) => {
-    const removeSelectedExercise = (exercise: WorkoutExercises) => {
-        /*setSelectedExercises(selectedExercises.filter(selectedExercise => {
-            const deletedExercise = exercise.exerciseId === selectedExercise.exerciseId && exercise.createdAt.getTime() === selectedExercise.createdAt.getTime();
-            return !deletedExercise;
-        }));*/
-    }
-
-    const updateExercise = (workoutExercises: WorkoutExercises, field: string, value: string) => {
-
-    }
-
+interface PickedWorkoutExercises {
+    workoutExercises: WorkoutExercises[];
+    exercises: Exercise[];
+    updateExerciseData: (exercisePickedDate: Date, field: string, value: number) => void;
+    removeSelectedExercise: (exercisePickedDate: Date) => void;
+}
+const WodForm = ({ workoutExercises, exercises, updateExerciseData, removeSelectedExercise }: PickedWorkoutExercises) => {
     return (
         <div>
             <h2 className="mt-10">Selected exercises</h2>
@@ -20,13 +15,25 @@ const WodForm = ({ workoutExercises, exercises }: { workoutExercises: WorkoutExe
                 {workoutExercises.map(selectedExercise => {
                     const selectedExerciseName = exercises.find(exercise => exercise.id === selectedExercise.exerciseId);
                     return (
-                        <li key={`${selectedExercise.exerciseId}-${crypto.randomUUID()}` } draggable={true}>
-                            <input onChange={((e) => selectedExercise.reps = Number(e.target.value) )} type="number" name="reps" placeholder="0"/>
+                        <li key={`${selectedExercise.exerciseId}-${selectedExercise.createdAt.getTime()}` } draggable={true}>
+                            <input
+                                onChange={((e) => updateExerciseData(selectedExercise.createdAt, 'reps', Number(e.target.value)) )}
+                                value={selectedExercise.reps ?? ""}
+                                type="number"
+                                name="reps"
+                                placeholder="0"
+                            />
                             <span>Reps</span>
                             <span>{selectedExerciseName?.name}</span>
-                            <input onChange={((e) => updateExercise(selectedExercise, '', e.target.value))} type="number" name="weight" placeholder="0"/>
+                            <input
+                                onChange={((e) => updateExerciseData(selectedExercise.createdAt, 'weight', Number(e.target.value)))}
+                                value={selectedExercise.weight ?? ""}
+                                type="number"
+                                name="weight"
+                                placeholder="0"
+                            />
                             <span>Kg</span>
-                            <button onClick={() => removeSelectedExercise(selectedExercise) }>
+                            <button onClick={() => removeSelectedExercise(selectedExercise.createdAt) }>
                                 <X name="removeExercise" color="black" size={20}/>
                             </button>
                         </li>
