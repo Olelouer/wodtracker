@@ -1,10 +1,10 @@
 import {Card, CardTitle, CardHeader, CardContent} from '@/components/ui/card';
-import { WodList, Wod } from '@/types/wod';
+import { Workout, Exercise } from '@/db/schema';
 
-const WodListCpn = ({ wods }: WodList)=> {
+const WodListCpn = ({ wod }: Workout[])=> {
     return (
         <ul className="list-none space-y-4">
-            {wods.map((wod: Wod) => (
+            {wod.map((wod: Workout => (
                 <Card key={wod.id}>
                     <CardHeader>
                         <CardTitle>{wod.title}</CardTitle>

@@ -1,8 +1,9 @@
-import { getWods } from '@/lib/data';
+import { db } from '@/db';
+import { workouts, workoutExercises } from '@/db/schema';
 import WodListCpn from "@/components/list/WodListCpn";
 
 const Dashboard = async () => {
-    const wods = await getWods();
+    const wods = await db.select().from(workouts);
 
     return (
         <div>

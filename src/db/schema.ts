@@ -11,33 +11,36 @@ export const users = pgTable('users', {
 export const workouts = pgTable('workouts', {
     id: serial('id').primaryKey(),
     // userId: text('user_id').notNull(),
-    title: text('title').notNull(),
-    date: text('date').notNull(),
+    title: text('title').default('Custom'),
+    date: text('date'),
     isRx: boolean('is_rx').default(true),
-    type: typeEnum('type').notNull(),
+    // type: typeEnum('type').notNull(),
     createdAt: timestamp('created_at').defaultNow()
 });
+
+export type Workout = InferSelectModel<typeof workouts>;
 
 export const exercises = pgTable('exercises', {
     id: serial('id').primaryKey(),
     name: text('name').notNull().unique(),
+    // type: text('type').notNull()
 });
 
 export type Exercise = InferSelectModel<typeof exercises>;
 
 // Junction Tables
 export const workoutExercises = pgTable('workout_exercises', {
+    id: serial('id').primaryKey(),
     workoutId: integer('workout_id').references(() => workouts.id).notNull(),
     exerciseId: integer('exercise_id').references(() => exercises.id).notNull(),
     reps: integer('reps'),
     weight: integer('weight'),
     createdAt: timestamp('created_at').defaultNow().notNull()
-}, (t) => ({
-        pk: primaryKey({ columns : [t.workoutId, t.exerciseId] }),
-    })
-);
+});
 
-export type WorkoutExercises = InferSelectModel<typeof workoutExercises>;
+export type WorkoutExercise = InferSelectModel<typeof workoutExercises>;
+
+export type WorkoutExerciseDraft = Omit<WorkoutExercise, 'id' | 'workoutId'>;
 
 // Relationships
 export const workoutsRelations = relations(workouts, ({ many }) => ({
