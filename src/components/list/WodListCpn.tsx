@@ -1,17 +1,17 @@
 import {Card, CardTitle, CardHeader, CardContent} from '@/components/ui/card';
-import { Workout, Exercise } from '@/db/schema';
+import {WorkoutWithExercises} from '@/db/schema';
 
-const WodListCpn = ({ wod }: Workout[])=> {
+const WodListCpn = ({ wods }: { wods: WorkoutWithExercises[] })=> {
     return (
         <ul className="list-none space-y-4">
-            {wod.map((wod: Workout => (
+            {wods.map((wod:WorkoutWithExercises) => (
                 <Card key={wod.id}>
                     <CardHeader>
                         <CardTitle>{wod.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        {wod.exercises.map((ex, index) => (
-                            <p key={`${ex.name}-${index}`}>{ex.name}</p>
+                        {wod.workoutExercises.map((ex) => (
+                            <p key={ex.id}>{ex.exercise.name}</p>
                         ))}
                         <p>{wod.date}</p>
                     </CardContent>

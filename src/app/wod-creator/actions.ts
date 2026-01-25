@@ -1,9 +1,9 @@
 "use server"
 
 import { db } from '@/db';
-import { workoutExercises, workouts, WorkoutExercisesDraft } from "@/db/schema";
+import { workoutExercises, workouts, WorkoutExerciseDraft } from "@/db/schema";
 
-export async function saveWodAction(data: WorkoutExercisesDraft[]) {
+export async function saveWodAction(data: WorkoutExerciseDraft[]) {
     try {
         const [newWod] = await db.insert(workouts).values({title: "Custom", date: new Date().toISOString()}).returning({ id: workouts.id});
         const exercisesToInsert = data.map((exercise) => ({

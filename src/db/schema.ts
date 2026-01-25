@@ -20,6 +20,12 @@ export const workouts = pgTable('workouts', {
 
 export type Workout = InferSelectModel<typeof workouts>;
 
+export type WorkoutWithExercises = Workout & {
+    workoutExercises: (WorkoutExercise & {
+        exercise: Exercise
+    })[]
+};
+
 export const exercises = pgTable('exercises', {
     id: serial('id').primaryKey(),
     name: text('name').notNull().unique(),

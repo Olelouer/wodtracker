@@ -1,8 +1,8 @@
 import {X} from "lucide-react";
-import {Exercise, WorkoutExercisesDraft} from '@/db/schema';
+import {Exercise, WorkoutExerciseDraft} from '@/db/schema';
 
 interface PickedWorkoutExercises {
-    workoutExercisesDraft: WorkoutExercisesDraft[];
+    workoutExercisesDraft: WorkoutExerciseDraft[];
     exercises: Exercise[];
     updateExerciseData: (exercisePickedDate: Date, field: string, value: number) => void;
     removeSelectedExercise: (exercisePickedDate: Date) => void;
