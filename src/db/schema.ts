@@ -1,7 +1,8 @@
 import {pgTable, serial, text, integer, timestamp, boolean, pgEnum, primaryKey} from 'drizzle-orm/pg-core';
 import {InferSelectModel, relations} from "drizzle-orm";
 
-export const typeEnum = pgEnum('workout_type', ['AMRAP', 'EMOM', 'FOR_TIME', 'TABATA', 'STRENGTH'])
+export const typeEnum = pgEnum('workout_type', ['AMRAP', 'EMOM', 'FOR_TIME', 'TABATA', 'STRENGTH']);
+export const exerciseTypeEnum = pgEnum('exercise_type', ['gymnastic', 'weightlifting']);
 
 export const users = pgTable('users', {
     id: serial('id').primaryKey(),
@@ -14,7 +15,7 @@ export const workouts = pgTable('workouts', {
     title: text('title').default('Custom'),
     date: text('date'),
     isRx: boolean('is_rx').default(true),
-    // type: typeEnum('type').notNull(),
+    // type: typeEnum('type'),
     createdAt: timestamp('created_at').defaultNow()
 });
 
@@ -29,6 +30,7 @@ export type WorkoutWithExercises = Workout & {
 export const exercises = pgTable('exercises', {
     id: serial('id').primaryKey(),
     name: text('name').notNull().unique(),
+    // type: typeEnum('type').notNull()
     // type: text('type').notNull()
 });
 
