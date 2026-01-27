@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f8b2586-7762-4cfc-8afc-c346ff8181d8" name="Changes" comment="separate wod creator components">
-      <change afterPath="$PROJECT_DIR$/src/components/ui/badge.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/list/WodListCpn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/list/WodListCpn.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/db/schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/schema.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,7 +107,8 @@
       <workItem from="1769109667914" duration="4782000" />
       <workItem from="1769274084835" duration="4160000" />
       <workItem from="1769371559208" duration="3432000" />
-      <workItem from="1769452512297" duration="4677000" />
+      <workItem from="1769452512297" duration="4700000" />
+      <workItem from="1769535150465" duration="6184000" />
     </task>
     <task id="LOCAL-00001" summary="separate wod creator components">
       <option name="closed" value="true" />
