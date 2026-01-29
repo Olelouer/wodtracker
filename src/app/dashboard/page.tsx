@@ -1,11 +1,21 @@
 import WodListCpn from "@/components/list/WodListCpn";
-import { getWods } from '@/app/dashboard/actions';
-import { currentUser } from '@clerk/nextjs/server'
+import {getWods, syncUser} from '@/app/dashboard/actions';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 const Dashboard = async () => {
+    const userId = await syncUser();
+    if(!userId) {
+        return (
+            <div className="w-full flex justify-center">
+                <Button>
+                    <Link href="/sign-up" className="font-semibold text-lg">Me connecter</Link>
+                </Button>
+            </div>
+        )
+    }
+
     const wods = await getWods();
-    const user = await currentUser();
-    console.log(user);
     return (
         <div>
             <h1 className="title">Dashboard WodTracker</h1>

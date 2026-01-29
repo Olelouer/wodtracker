@@ -6,7 +6,6 @@ import { WorkoutWithExercises } from '@/db/schema';
 import { Dumbbell, Calendar, Flame, Weight } from 'lucide-react';
 
 const WodListCpn = ({ wods }: { wods: WorkoutWithExercises[] }) => {
-    // Petit check de sécurité au cas où la liste est vide
     if (wods.length === 0) {
         return (
             <div className="flex justify-center w-full flex-col">
