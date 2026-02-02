@@ -18,7 +18,10 @@ const Dashboard = async () => {
     const wods = await getWods();
     return (
         <div>
-            <h1 className="title">Dashboard WodTracker</h1>
+            <div className="text-center mb-12">
+                <h1 className="text-4xl font-black uppercase tracking-tight text-foreground mb-2">WOD Tracker</h1>
+                <p className="text-muted-foreground">Track your Crossfit workouts and crush your goals</p>
+            </div>
             <WodListCpn wods={wods}/>
         </div>
     )

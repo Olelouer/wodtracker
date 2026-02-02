@@ -40,6 +40,7 @@ export const workouts = pgTable('workouts', {
     title: text('title').default('Custom'),
     description: text('description'),
     date: timestamp('date'),
+    duration: integer('duration'),
     type: workoutTypeEnum('type').notNull(),
     isRx: boolean('is_rx').default(true),
     scoreValue: integer('scoreValue'),
