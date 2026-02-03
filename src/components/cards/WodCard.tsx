@@ -13,15 +13,15 @@ const WodCard = ({ wod }: { wod: WorkoutWithExercises }) => {
         }
     }
     return (
-        <Card className="group relative overflow-hidden border-0 bg-card shadow-lg hover:shadow-xl transitionn duration-300">
-            <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-orange-500 via-red-500 to-orange-600"/>
+        <Card className="group relative overflow-hidden border-0 bg-card shadow-lg hover:shadow-xl transition duration-300">
+            <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-brand-500 via-brand-accent-500 to-brand-600"/>
 
             <CardHeader className="pb-4 pl-6">
                 <div className="flex items-center justify-between gap-4">
                     <div className="space-y-1.5">
                         {wod.type && (
                             <Badge variant="outline"
-                                   className="border-orange-500/30 bg-orange500/10 text-orange-600 font-bold text-[10px] tracking-wider"
+                                   className="border-brand-500/30 bg-brand-500/10 text-brand-600 font-bold text-[10px] tracking-wider"
                             >
                                 <Zap className="w-3 h-3"/>
                                 {wod.type}
@@ -50,11 +50,11 @@ const WodCard = ({ wod }: { wod: WorkoutWithExercises }) => {
                 <div className="space-y-2">
                     {wod.workoutExercises.map((ex) => (
                         <div
-                            key={ex.createdAt.getTime()}
+                            key={ex.id}
                             className="flex items-center justify-between py-2.5 px-3 rounded-lg bg-muted"
                         >
                             <div className="flex items-center gap-3">
-                                <div className="flex items-center justify-between w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-500 text-white shadow-sm">
+                                <div className="flex items-center justify-between w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-accent-500 text-brand-foreground shadow-sm">
                                     {getExerciseIcon(ex.exercise)}
                                 </div>
                                 <span className="font-semibold text-sm text-foreground">
@@ -65,7 +65,7 @@ const WodCard = ({ wod }: { wod: WorkoutWithExercises }) => {
                                 <div className="flex items-center gap-1">
                                     {ex.reps && (
                                         <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background border border-border">
-                                            <Flame className="w-3.5 h-3.5 text-orange-500"/>
+                                            <Flame className="w-3.5 h-3.5 text-brand-500"/>
                                             {ex.reps}
                                         </div>
                                     )}
