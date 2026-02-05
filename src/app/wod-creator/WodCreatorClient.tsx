@@ -31,7 +31,6 @@ const WodCreatorClient = ({ exercises }: { exercises: Exercise[] }) => {
 
     const saveWorkout = async() => {
         const result = await saveWodAction(selectedExercises);
-        if(result) console.log(result);
     }
 
     return (

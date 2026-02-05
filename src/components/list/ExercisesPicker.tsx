@@ -1,5 +1,6 @@
 "use client"
 import {Exercise} from "@/db/schema";
+import ExerciseCard from "../cards/ExerciseCard";
 
 const ExercisesPicker = ({ exercises, addExercise }: { exercises: Exercise[], addExercise: (exercise: Exercise) => void;}) => {
     return (
@@ -7,13 +8,11 @@ const ExercisesPicker = ({ exercises, addExercise }: { exercises: Exercise[], ad
             <h2 className="mt-10">Exercises picker</h2>
             <ul className="list-none">
                 {exercises.map(exercise => (
-                    <li key={exercise.id} className="mt-1">
-                        <button
-                            onClick={() => addExercise(exercise)}
-                        >
-                            {exercise.name}
-                        </button>
-                    </li>
+                    <ExerciseCard 
+                        key={exercise.id} 
+                        exercise={exercise} 
+                        addExercise={addExercise}
+                    />
                 ))}
             </ul>
         </div>

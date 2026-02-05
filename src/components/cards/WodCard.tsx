@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Dumbbell, Flame, Calendar, Timer, Zap, Activity, Orbit } from 'lucide-react';
+import { Dumbbell, Flame, Calendar, Timer, Zap, Activity, Orbit, Wind } from 'lucide-react';
 import {Exercise, WorkoutWithExercises} from "@/db/schema";
 
 const WodCard = ({ wod }: { wod: WorkoutWithExercises }) => {
@@ -9,6 +9,7 @@ const WodCard = ({ wod }: { wod: WorkoutWithExercises }) => {
         switch(exercise.type) {
             case 'gymnastic': return <Orbit className="w-4 h-4"/>
             case 'cardio': return <Activity className="w-4 h-4"/>
+            case 'monostructural': return <Wind className="w-4 h-4"/>
             default: return <Dumbbell className="w-4 h-4"/>
         }
     }

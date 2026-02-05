@@ -17,6 +17,7 @@ export const exerciseTypeEnum = pgEnum('exercise_type', [
     'gymnastic',
     'weightlifting',
     'cardio',
+    'monostructural',
     'other'
 ]);
 
