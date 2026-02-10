@@ -64,6 +64,10 @@ export const exercises = pgTable('exercises', {
 
 export type Exercise = InferSelectModel<typeof exercises>;
 
+export type ExerciseWithDetails = WorkoutExercise & {
+    exercise: Exercise
+};
+
 // Junction Tables
 export const workoutExercises = pgTable('workout_exercises', {
     id: serial('id').primaryKey(),

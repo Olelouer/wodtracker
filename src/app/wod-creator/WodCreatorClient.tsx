@@ -1,15 +1,25 @@
 'use client'
-import {Exercise, WorkoutExercisesDraft} from '@/db/schema';
+import { Exercise, WorkoutExerciseDraft } from '@/db/schema';
 import ExercisesPicker from '@/components/list/ExercisesPicker';
 import WodForm from '@/components/forms/WodForm';
 import {useState} from "react";
 import { saveWodAction } from '@/app/wod-creator/actions';
 
 const WodCreatorClient = ({ exercises }: { exercises: Exercise[] }) => {
-    const [selectedExercises, setSelectedExercises] = useState<WorkoutExercisesDraft[]>([]);
+    const [selectedExercises, setSelectedExercises] = useState<WorkoutExerciseDraft[]>([]);
 
     const addExercise = (exercise: Exercise) => {
-        setSelectedExercises([...selectedExercises, { exerciseId: exercise.id, weight: null, reps: null, createdAt: new Date()}]);
+        setSelectedExercises([
+            ...selectedExercises,
+            {
+                exerciseId: exercise.id,
+                sets: null,
+                reps: null,
+                weight: null,
+                comment: null,
+                createdAt: new Date(),
+            },
+        ]);
     }
 
     const removeSelectedExercise = (exercisePickedDate: Date) => {

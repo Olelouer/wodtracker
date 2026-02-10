@@ -1,18 +1,11 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Dumbbell, Flame, Calendar, Timer, Zap, Activity, Orbit, Wind } from 'lucide-react';
-import {Exercise, WorkoutWithExercises} from "@/db/schema";
+import { Flame, Calendar, Timer, Zap } from 'lucide-react';
+import {WorkoutWithExercises} from "@/db/schema";
+import { getExerciseIcon } from '../ui/exercise-icon';
+import WorkoutExerciseCard from './WorkoutExerciseCard';
 
 const WodCard = ({ wod }: { wod: WorkoutWithExercises }) => {
-
-    const getExerciseIcon = (exercise: Exercise) => {
-        switch(exercise.type) {
-            case 'gymnastic': return <Orbit className="w-4 h-4"/>
-            case 'cardio': return <Activity className="w-4 h-4"/>
-            case 'monostructural': return <Wind className="w-4 h-4"/>
-            default: return <Dumbbell className="w-4 h-4"/>
-        }
-    }
     return (
         <Card className="group relative overflow-hidden border-0 bg-card shadow-lg hover:shadow-xl transition duration-300">
             <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-brand-500 via-brand-accent-500 to-brand-600"/>
@@ -50,45 +43,17 @@ const WodCard = ({ wod }: { wod: WorkoutWithExercises }) => {
             <CardContent className="space-y-4 pl-6">
                 <div className="space-y-2">
                     {wod.workoutExercises.map((ex) => (
-                        <div
-                            key={ex.id}
-                            className="flex items-center justify-between py-2.5 px-3 rounded-lg bg-muted"
-                        >
-                            <div className="flex items-center gap-3">
-                                <div className="flex items-center justify-between w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-accent-500 text-brand-foreground shadow-sm">
-                                    {getExerciseIcon(ex.exercise)}
-                                </div>
-                                <span className="font-semibold text-sm text-foreground">
-                                    {ex.exercise.name}
-                                </span>
-                            </div>
-                            { (ex.reps || ex.weight) && (
-                                <div className="flex items-center gap-1">
-                                    {ex.reps && (
-                                        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background border border-border">
-                                            <Flame className="w-3.5 h-3.5 text-brand-500"/>
-                                            {ex.reps}
-                                        </div>
-                                    )}
-                                    { ex.weight && (
-                                        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background border border-border">
-                                            <span className="font-mono text-sm font-bold text-foreground">
-                                                {`${ex.weight}kg`}
-                                            </span>
-                                        </div>
-                                    )}
-                                </div>
-                            )}
-                        </div>
+                        <WorkoutExerciseCard key={ex.id} exerciseWithDetails={ex} />
                     ))}
                 </div>
-
-                {/* Footer */}
-                <div className="flex items-center justify-between pt-4 border-t border-border">
+            </CardContent>
+            {/* Footer */}
+            <CardFooter className="mt-auto space-y-4 w-full px-4">
+                <div className="flex items-center justify-between pt-4 w-full border-t border-border">
                     <div className="flex items-center gap--2 text-muted-foreground">
                         <Calendar className="w-4 h-4" />
-                        <span className="text-xs font-semibold uppercase tracking-wide">
-                            {wod.date}
+                        <span className="text-xs ml-2 font-semibold uppercase tracking-wide">
+                            {wod.date?.toLocaleDateString()}
                         </span>
                     </div>
                     <div className="flex items-center gap-1 text-xs text-muted-foreground">
@@ -96,7 +61,8 @@ const WodCard = ({ wod }: { wod: WorkoutWithExercises }) => {
                         <span className="text-xs font-semibold uppercase tracking-wide">exercises</span>
                     </div>
                 </div>
-            </CardContent>
+            </CardFooter>
+            
         </Card>
     )
 }

@@ -10,11 +10,11 @@ export async function saveWodAction(data: WorkoutExerciseDraft[]) {
     if(!user) return { success: false, error: "Utilisateur non connecté" };
     try {
         const [newWod] = await db.insert(workouts).values({
-            title: "Custom",
             userId: user.id,
             type: "AMRAP",
-            date: new Date().toISOString()
+            date: new Date()
         }).returning({ id: workouts.id});
+        console.log(newWod);
         const exercisesToInsert = data.map((exercise) => ({
            ...exercise,
            workoutId: newWod.id

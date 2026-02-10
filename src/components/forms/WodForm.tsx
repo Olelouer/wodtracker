@@ -1,5 +1,6 @@
-import {X} from "lucide-react";
 import {Exercise, WorkoutExerciseDraft} from '@/db/schema';
+import ExerciseCard from "../cards/ExerciseCard";
+import ExerciseCardDraft from '../cards/ExerciseCardDraft';
 
 interface PickedWorkoutExercises {
     workoutExercisesDraft: WorkoutExerciseDraft[];
@@ -14,33 +15,19 @@ const WodForm = ({ workoutExercisesDraft, exercises, updateExerciseData, removeS
             <h2 className="mt-10">Selected exercises</h2>
             <form action={saveWorkout}>
                 <ul>
-                    {workoutExercisesDraft.map(selectedExercise => {
-                        const selectedExerciseName = exercises.find(exercise => exercise.id === selectedExercise.exerciseId);
+                    {workoutExercisesDraft.map(workoutDraft => {
+                        const exercise = exercises.find(ex => ex.id === workoutDraft.exerciseId);
+                        if (!exercise) return null;
                         return (
-                            <li key={`${selectedExercise.exerciseId}-${selectedExercise.createdAt.getTime()}` } draggable={true}>
-                                <input
-                                    onChange={((e) => updateExerciseData(selectedExercise.createdAt, 'reps', Number(e.target.value)) )}
-                                    value={selectedExercise.reps ?? ""}
-                                    type="number"
-                                    name="reps"
-                                    placeholder="0"
-                                />
-                                <span>Reps</span>
-                                <span>{selectedExerciseName?.name}</span>
-                                <input
-                                    onChange={((e) => updateExerciseData(selectedExercise.createdAt, 'weight', Number(e.target.value)))}
-                                    value={selectedExercise.weight ?? ""}
-                                    type="number"
-                                    name="weight"
-                                    placeholder="0"
-                                />
-                                <span>Kg</span>
-                                <button onClick={() => removeSelectedExercise(selectedExercise.createdAt) }>
-                                    <X name="removeExercise" color="black" size={20}/>
-                                </button>
-                            </li>
-                        )})
-                    }
+                            <ExerciseCardDraft
+                                key={`${workoutDraft.exerciseId}-${workoutDraft.createdAt.getTime()}`}
+                                exercise={exercise}
+                                workoutDraft={workoutDraft}
+                                removeExercise={() => removeSelectedExercise(workoutDraft.createdAt)}
+                                updateExerciseData={updateExerciseData}
+                            />
+                        );
+                    })}
                 </ul>
                 <button type="submit">Save Wod</button>
             </form>

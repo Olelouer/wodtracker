@@ -1,15 +1,14 @@
 import { Exercise } from '@/db/schema';
-import { Zap, Activity, Dumbbell, Wind, Plus } from 'lucide-react';
+import { getExerciseIcon } from "@/components/ui/exercise-icon";
 
-const ExerciseCard = ({ exercise, addExercise, picker }: { exercise: Exercise, addExercise: (exercise: Exercise) => void }) => {
-    const getExerciseIcon = (exercise: Exercise) => {
-        switch(exercise.type) {
-            case 'gymnastic': return <Zap className="bg-sky-500/10 border-sky-500/30"/>
-            case 'cardio': return <Activity className="bg-rose-500/10"/>
-            case 'monostructural': return <Wind className="bg-emerald-500/10"/>
-            default: return <Dumbbell className="bg-orange-500/10 border-orange-500/30"/>
-        }
-    }
+
+interface ExerciseCardProps {
+    exercise: Exercise;
+    children?: React.ReactNode;
+}
+
+const ExerciseCard = ({ exercise, children }: ExerciseCardProps) => {
+    const exerciseIcon = getExerciseIcon(exercise);
     return (
         <div
             className="group/item flex items-center justify-between py-2.5 px-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors duration-200"
@@ -23,7 +22,7 @@ const ExerciseCard = ({ exercise, addExercise, picker }: { exercise: Exercise, a
                     }`}
                 >
                     <span className="w-4 h-4 text-white flex items-center justify-center">                    
-                        {getExerciseIcon(exercise)}
+                        {exerciseIcon}
                     </span>
                 </div>
                 <div className="flex flex-col gap-0.5">
@@ -34,11 +33,13 @@ const ExerciseCard = ({ exercise, addExercise, picker }: { exercise: Exercise, a
                         {exercise.type}
                     </span>
                 </div>
-                
             </div>
-            <button onClick={() => addExercise(exercise)} className="flex items-center justify-center w-7 h-7 rounded-full border border-border bg-background text-muted-foreground opacity-0 group-hover/item:opacity-100 transition-opacity duration-200 cursor-pointer">
-                <Plus className="w-4 h-4"/>
-            </button>
+
+            {children && (
+                <div className="flex items-center gap-2">
+                    {children}
+                </div>
+            )}     
         </div>
     )
 }
