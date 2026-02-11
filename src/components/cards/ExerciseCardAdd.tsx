@@ -9,9 +9,9 @@ const ExerciseCardAdd = ({ exercise, addExercise }: { exercise: Exercise, addExe
                 type="button"
                 aria-label={`Add ${exercise.name}`}
                 onClick={() => addExercise(exercise)}
-                className="flex items-center justify-center w-7 h-7 rounded-full border border-border bg-background text-muted-foreground opacity-0 group-hover/item:opacity-100 transition-opacity duration-200 cursor-pointer"
+                className="flex items-center justify-center w-7 h-7 rounded-full border border-border bg-background text-muted-foreground cursor-pointer"
             >
-                <Plus className="w-4 h-4" />
+                <Plus className="w-4 h-4 text-brand" />
             </button>
         </ExerciseCard>
     )

@@ -6,9 +6,12 @@ export default async function WodCreatorPage() {
     const allExercises = await db.select().from(exercises);
 
     return(
-        <main>
-            <h1>Wod Creator</h1>
+        <div>
+            <div className="text-center mb-12">
+                <h1 className="text-4xl font-black uppercase tracking-tight text-foreground mb-2">WOD Creator</h1>
+                <p className="text-muted-foreground"></p>
+            </div>
             <WodCreatorClient exercises={allExercises} />
-        </main>
+        </div>
     )
 }

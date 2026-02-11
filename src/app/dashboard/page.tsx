@@ -21,6 +21,11 @@ const Dashboard = async () => {
             <div className="text-center mb-12">
                 <h1 className="text-4xl font-black uppercase tracking-tight text-foreground mb-2">WOD Tracker</h1>
                 <p className="text-muted-foreground">Track your Crossfit workouts and crush your goals</p>
+                <div className="flex justify-center items-center mt-4">
+                    <Button >
+                        <Link href="/wod-creator" className="text-lg font-semibold">Create a new workout</Link>
+                    </Button>
+                </div>
             </div>
             <WodListCpn wods={wods}/>
         </div>

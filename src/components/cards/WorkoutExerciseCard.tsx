@@ -11,6 +11,7 @@ const WorkoutExerciseCard = ({ exerciseWithDetails }: { exerciseWithDetails: Exe
                     <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background border border-borde font-mono text-sm font-semibold">
                         <Flame className="w-3.5 h-3.5 text-brand shrink-0" />
                         {exerciseWithDetails.reps}
+                        <span className="text-xs font-semibold uppercase tracking-wide">reps</span>
                     </div>
                 </div>
             )}

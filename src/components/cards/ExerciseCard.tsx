@@ -14,7 +14,7 @@ const ExerciseCard = ({ exercise, children }: ExerciseCardProps) => {
             className="group/item flex items-center justify-between py-2.5 px-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors duration-200"
         >
             <div className="flex items-center gap-3">
-                <div className={`flex items-center justify-center w-8 h-8 shadow-sm rounded-full bg-gradient-to-br ${
+                <div className={`flex items-center justify-center w-8 h-8 shadow-sm rounded-full bg-linear-to-br ${
                     exercise.type.toLowerCase() === 'gymnastic' ? 'from-sky-500 to-blue-500' 
                     : exercise.type.toLowerCase() === 'cardio' ? 'from-rose-500 to-pink-500'
                     : exercise.type.toLowerCase() === 'monostructural' ? 'from-emerald-500 to-teal-500'

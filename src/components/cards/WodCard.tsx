@@ -8,14 +8,14 @@ import WorkoutExerciseCard from './WorkoutExerciseCard';
 const WodCard = ({ wod }: { wod: WorkoutWithExercises }) => {
     return (
         <Card className="group relative overflow-hidden border-0 bg-card shadow-lg hover:shadow-xl transition duration-300">
-            <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-brand-500 via-brand-accent-500 to-brand-600"/>
+            <div className="absolute left-0 top-0 h-full w-1.5 bg-linear-to-b from-brand via-brand-accent to-brand"/>
 
             <CardHeader className="pb-4 pl-6">
                 <div className="flex items-center justify-between gap-4">
                     <div className="space-y-1.5">
                         {wod.type && (
                             <Badge variant="outline"
-                                   className="border-brand-500/30 bg-brand-500/10 text-brand-600 font-bold text-[10px] tracking-wider"
+                                   className="border-brand/30 bg-brand/10 text-brand font-bold text-[10px] tracking-wider"
                             >
                                 <Zap className="w-3 h-3"/>
                                 {wod.type}
