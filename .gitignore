@@ -40,7 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.idea/workspace.xml
+# idea
+.idea/
 
 # clerk configuration (can include secrets)
 /.clerk/
