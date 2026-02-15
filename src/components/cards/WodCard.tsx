@@ -1,8 +1,7 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Flame, Calendar, Timer, Zap } from 'lucide-react';
+import { Calendar, Timer, Zap } from 'lucide-react';
 import {WorkoutWithExercises} from "@/db/schema";
-import { getExerciseIcon } from '../ui/exercise-icon';
 import WorkoutExerciseCard from './WorkoutExerciseCard';
 
 const WodCard = ({ wod }: { wod: WorkoutWithExercises }) => {
@@ -22,7 +21,7 @@ const WodCard = ({ wod }: { wod: WorkoutWithExercises }) => {
                             </Badge>
                         )}
                         <CardTitle className="text-2xl font-black uppercase tracking-tight text-foreground">
-                            {wod.title || "WOD"}
+                            {wod.title || "Workout"}
                         </CardTitle>
                     </div>
                     {wod.isRx && (
@@ -47,7 +46,7 @@ const WodCard = ({ wod }: { wod: WorkoutWithExercises }) => {
                     ))}
                 </div>
             </CardContent>
-            {/* Footer */}
+
             <CardFooter className="mt-auto space-y-4 w-full px-4">
                 <div className="flex items-center justify-between pt-4 w-full border-t border-border">
                     <div className="flex items-center gap--2 text-muted-foreground">

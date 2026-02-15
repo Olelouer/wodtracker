@@ -8,17 +8,23 @@ const WorkoutExerciseCard = ({ exerciseWithDetails }: { exerciseWithDetails: Exe
         <ExerciseCard exercise={exercise}>
             {exerciseWithDetails.reps && (
                 <div className="flex items-center gap-2">
-                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background border border-borde font-mono text-sm font-semibold">
-                        <Flame className="w-3.5 h-3.5 text-brand shrink-0" />
+                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background border border-borde font-mono text-xs font-semibold">
                         {exerciseWithDetails.reps}
-                        <span className="text-xs font-semibold uppercase tracking-wide">reps</span>
+                        <span className="font-mono font-semibold tracking-wide text-foreground">reps</span>
                     </div>
                 </div>
             )}
             {exerciseWithDetails.weight && (
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background border border-border">
-                    <span className="font-mono text-sm font-semibold text-foreground">
+                    <span className="font-mono text-xs font-semibold text-foreground">
                         {`${exerciseWithDetails.weight}kg`}
+                    </span>
+                </div>
+            )}
+            {exerciseWithDetails.sets && (
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background border border-border text-xs">
+                    <span className="font-mono font-semibold text-foreground">
+                        {`${exerciseWithDetails.sets} sets`}
                     </span>
                 </div>
             )}

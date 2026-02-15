@@ -1,5 +1,5 @@
 import { Exercise, WorkoutExerciseDraft } from '@/db/schema';
-import { Trash, Flame } from 'lucide-react';
+import { Trash, Flame, Dumbbell, Zap } from 'lucide-react';
 import ExerciseCard from './ExerciseCard';
 
 interface ExerciseCardDraftProps {
@@ -10,7 +10,7 @@ interface ExerciseCardDraftProps {
 }
 
 const ExerciseCardDraft = ({ exercise, workoutDraft, removeExercise, updateExerciseData }: ExerciseCardDraftProps) => {
-    const handleUpdate = (field: 'weight' | 'reps') => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleUpdate = (field: 'weight' | 'reps' | 'sets') => (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value === '' ? 0 : Number(e.target.value);
         updateExerciseData(workoutDraft.createdAt, field, value);
     };
@@ -19,16 +19,15 @@ const ExerciseCardDraft = ({ exercise, workoutDraft, removeExercise, updateExerc
         <ExerciseCard exercise={exercise}>
             <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background border border-border">
-                        <Flame className="w-3.5 h-3.5 text-brand shrink-0" />
-                        <input
-                            type="number"
-                            min={0}
-                            placeholder="0"
-                            value={workoutDraft.reps ?? ''}
-                            onChange={handleUpdate('reps')}
-                            className="w-14 bg-transparent border-none p-0 text-sm font-mono focus:outline-none focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                        />
-                        <span className="font-mono text-sm font-bold text-foreground">reps</span>
+                    <input
+                        type="number"
+                        min={0}
+                        placeholder="0"
+                        value={workoutDraft.reps ?? ''}
+                        onChange={handleUpdate('reps')}
+                        className="w-14 bg-transparent border-none p-0 text-sm font-mono focus:outline-none focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    />
+                    <span className="font-mono text-sm font-bold text-foreground">reps</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background border border-border">
                     <input
@@ -40,6 +39,17 @@ const ExerciseCardDraft = ({ exercise, workoutDraft, removeExercise, updateExerc
                         className="w-14 bg-transparent border-none p-0 text-sm font-mono focus:outline-none focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
                     <span className="font-mono text-sm font-bold text-foreground">kg</span>
+                </div>
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background border border-border">
+                    <input
+                        type="number"
+                        min={0}
+                        placeholder="0"
+                        value={workoutDraft.sets ?? ''}
+                        onChange={handleUpdate('sets')}
+                        className="w-14 bg-transparent border-none p-0 text-sm font-mono focus:outline-none focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    />
+                    <span className="font-mono text-sm font-bold text-foreground">sets</span>
                 </div>
                 
                 <button

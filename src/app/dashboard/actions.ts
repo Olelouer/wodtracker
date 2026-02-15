@@ -1,9 +1,9 @@
 "use server"
 
 import { db } from '@/db';
-import { users } from '@/db/schema';
+import { users, workouts } from '@/db/schema';
 import { currentUser } from '@clerk/nextjs/server';
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 
 export async function getWods()  {
     try {
@@ -12,12 +12,13 @@ export async function getWods()  {
                 workoutExercises: {
                     with: {
                         exercise: true
-                    }
+                    },
                 }
-            }
+            },
+            orderBy: [desc(workouts.date)]
         });
     } catch(e) {
-        console.log(e);
+        console.error(e);
         return [];
     }
 }

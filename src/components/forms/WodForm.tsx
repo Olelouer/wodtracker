@@ -23,13 +23,18 @@ const WodForm = ({ workoutExercisesDraft, exercises, updateExerciseData, removeS
                             const exercise = exercises.find(ex => ex.id === workoutDraft.exerciseId);
                             if (!exercise) return null;
                             return (
-                                <ExerciseCardDraft
+                                <div
+                                    className="animate-in zoom-in-95 fade-in duration-200" 
                                     key={`${workoutDraft.exerciseId}-${workoutDraft.createdAt.getTime()}`}
-                                    exercise={exercise}
-                                    workoutDraft={workoutDraft}
-                                    removeExercise={() => removeSelectedExercise(workoutDraft.createdAt)}
-                                    updateExerciseData={updateExerciseData}
-                                />
+                                    draggable
+                                >
+                                    <ExerciseCardDraft
+                                        exercise={exercise}
+                                        workoutDraft={workoutDraft}
+                                        removeExercise={() => removeSelectedExercise(workoutDraft.createdAt)}
+                                        updateExerciseData={updateExerciseData}
+                                    />
+                                </div>
                             );
                         })}
                     </ul>

@@ -8,7 +8,6 @@ const WodListCpn = ({ wods }: { wods: WorkoutWithExercises[] }) => {
     if (wods.length === 0) {
         return (
             <div>
-                <h2 className="text-2xl font-bold">Mes entrainements</h2>
                 <div className="flex justify-center w-full flex-col">
                     <div className="flex justify-center items-center pt-10 pb-5">
                         <Flame className="text-orange-500 mr-2"/>
@@ -19,13 +18,13 @@ const WodListCpn = ({ wods }: { wods: WorkoutWithExercises[] }) => {
                             <Link href="/wod-creator" className="text-lg font-semibold">Créer mon premier WOD !</Link>
                         </Button>
                     </div>
-            </div>
+                </div>
             </div>
         )
     }
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
             {wods.map((wod) => (
                 <WodCard key={wod.id} wod={wod} />
             ))}
