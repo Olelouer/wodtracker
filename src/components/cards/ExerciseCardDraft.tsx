@@ -1,6 +1,7 @@
 import { Exercise, WorkoutExerciseDraft } from '@/db/schema';
-import { Trash, Flame, Dumbbell, Zap } from 'lucide-react';
+import { Trash } from 'lucide-react';
 import ExerciseCard from './ExerciseCard';
+import { useState } from 'react';
 
 interface ExerciseCardDraftProps {
     exercise: Exercise;
@@ -10,13 +11,28 @@ interface ExerciseCardDraftProps {
 }
 
 const ExerciseCardDraft = ({ exercise, workoutDraft, removeExercise, updateExerciseData }: ExerciseCardDraftProps) => {
+    const [isRemoving, setIsRemoving] = useState(false);
+
     const handleUpdate = (field: 'weight' | 'reps' | 'sets') => (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value === '' ? 0 : Number(e.target.value);
         updateExerciseData(workoutDraft.createdAt, field, value);
     };
 
+    const handleRemove = () => {
+        setIsRemoving(true);
+    };
     return (
-        <ExerciseCard exercise={exercise}>
+        <ExerciseCard 
+            exercise={exercise} 
+            onTransitionEnd={(e) => {
+                if (isRemoving && e.propertyName === 'opacity') {
+                    removeExercise();
+                }
+            }}
+            className={`transition-all duration-150 ease-out ${
+                isRemoving ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100'
+            }`}
+        >
             <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background border border-border">
                     <input
@@ -54,7 +70,7 @@ const ExerciseCardDraft = ({ exercise, workoutDraft, removeExercise, updateExerc
                 
                 <button
                     type="button"
-                    onClick={removeExercise}
+                    onClick={handleRemove}
                     className="flex items-center justify-center w-7 h-7 rounded-full border border-border bg-background text-muted-foreground cursor-pointer hover:text-destructive"
                 >
                     <Trash className="w-4 h-4" />

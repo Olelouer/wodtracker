@@ -1,17 +1,20 @@
 import { Exercise } from '@/db/schema';
 import { getExerciseIcon } from "@/components/ui/exercise-icon";
+import { cn } from '@/lib/utils';
 
 
-interface ExerciseCardProps {
+interface ExerciseCardProps extends React.HTMLAttributes<HTMLDivElement> {
     exercise: Exercise;
     children?: React.ReactNode;
+    className?: string;
 }
 
-const ExerciseCard = ({ exercise, children }: ExerciseCardProps) => {
+const ExerciseCard = ({ exercise, children, className, ...props }: ExerciseCardProps) => {
     const exerciseIcon = getExerciseIcon(exercise);
     return (
         <div
-            className="group/item flex items-center justify-between py-2.5 px-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors duration-200"
+            {...props}
+            className={cn(`group/item flex items-center justify-between py-2.5 px-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors duration-200 ${className}`)}
         >
             <div className="flex items-center gap-3">
                 <div className={`flex items-center justify-center w-8 h-8 shadow-sm rounded-full bg-linear-to-br ${

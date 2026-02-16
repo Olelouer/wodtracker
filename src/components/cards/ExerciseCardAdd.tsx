@@ -3,8 +3,13 @@ import { Plus } from 'lucide-react';
 import ExerciseCard from './ExerciseCard';
 
 const ExerciseCardAdd = ({ exercise, addExercise }: { exercise: Exercise, addExercise: (exercise: Exercise) => void }) => {
+    
+    
     return (
-        <ExerciseCard exercise={exercise}>
+        <ExerciseCard
+            exercise={exercise} 
+            className="transition-transform duration-150 ease-out active:scale-99"
+        >
             <button
                 type="button"
                 aria-label={`Add ${exercise.name}`}
