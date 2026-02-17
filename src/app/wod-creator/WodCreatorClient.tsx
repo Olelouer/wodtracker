@@ -40,6 +40,16 @@ const WodCreatorClient = ({ exercises, exercisesTypes }: { exercises: Exercise[]
         setSelectedExercises(newSelectedExercises);
     }
 
+    const reorderExercises = (fromIndex: number, toIndex: number) => {
+        if (fromIndex === toIndex) return;
+        setSelectedExercises((prev) => {
+            const next = [...prev];
+            const [item] = next.splice(fromIndex, 1);
+            next.splice(toIndex, 0, item);
+            return next;
+        });
+    };
+
     const saveWorkout = async() => {
         const result = await saveWodAction(selectedExercises);
     }
@@ -57,6 +67,7 @@ const WodCreatorClient = ({ exercises, exercisesTypes }: { exercises: Exercise[]
                     exercises={exercises}
                     updateExerciseData={updateExercise}
                     removeSelectedExercise={removeSelectedExercise}
+                    reorderExercises={reorderExercises}
                     saveWorkout={saveWorkout}
                 />
             </div>

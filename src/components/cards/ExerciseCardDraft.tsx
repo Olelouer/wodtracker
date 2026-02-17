@@ -3,14 +3,14 @@ import { Trash } from 'lucide-react';
 import ExerciseCard from './ExerciseCard';
 import { useState } from 'react';
 
-interface ExerciseCardDraftProps {
+interface ExerciseCardDraftProps extends React.HTMLAttributes<HTMLDivElement> {
     exercise: Exercise;
     workoutDraft: WorkoutExerciseDraft;
     removeExercise: () => void;
     updateExerciseData: (createdAt: Date, field: string, value: number) => void;
 }
 
-const ExerciseCardDraft = ({ exercise, workoutDraft, removeExercise, updateExerciseData }: ExerciseCardDraftProps) => {
+const ExerciseCardDraft = ({ exercise, workoutDraft, removeExercise, updateExerciseData, ...props }: ExerciseCardDraftProps) => {
     const [isRemoving, setIsRemoving] = useState(false);
 
     const handleUpdate = (field: 'weight' | 'reps' | 'sets') => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,16 +22,17 @@ const ExerciseCardDraft = ({ exercise, workoutDraft, removeExercise, updateExerc
         setIsRemoving(true);
     };
     return (
-        <ExerciseCard 
+        <ExerciseCard
+            {...props} 
             exercise={exercise} 
             onTransitionEnd={(e) => {
                 if (isRemoving && e.propertyName === 'opacity') {
                     removeExercise();
                 }
             }}
-            className={`transition-all duration-150 ease-out ${
-                isRemoving ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100'
-            }`}
+            className={
+                `transition-all duration-150 ease-out ${isRemoving ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100'}`
+            }
         >
             <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background border border-border">
