@@ -1,4 +1,4 @@
-import WodCard from '@/components/cards/WodCard';
+import WodCard from '@/components/cards/wod-cards/WodCard';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { WorkoutWithExercises } from '@/db/schema';

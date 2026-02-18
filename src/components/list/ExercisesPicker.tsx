@@ -1,11 +1,11 @@
 "use client"
 import {Exercise} from "@/db/schema";
-import ExerciseCardAdd from "../cards/ExerciseCardAdd";
+import ExerciseCardAdd from "../cards/exercise-cards/ExerciseCardAdd";
 import { useMemo, useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { X } from "lucide-react";
-import ExerciseTypeFilter from "../cards/ExerciseTypeFilter";
+import ExerciseTypeFilter from "../cards/exercise-cards/ExerciseTypeFilter";
 
 const ExercisesPicker = ({ exercises, addExercise, exercisesTypes }: { exercises: Exercise[], addExercise: (exercise: Exercise) => void, exercisesTypes: { type: string }[] }) => {
     const [selectedType, setSelectedType] = useState<string>('');
@@ -33,15 +33,15 @@ const ExercisesPicker = ({ exercises, addExercise, exercisesTypes }: { exercises
             </div>
             <ul className="flex gap-2 mb-4">
                 <ExerciseTypeFilter label="All" value="" isActive={selectedType === ''} OnClick={setSelectedType} />
-                {exercisesTypes.map(type => (
-                    <ExerciseTypeFilter key={type.type} label={type.type.toUpperCase()} value={type.type} isActive={selectedType === type.type} OnClick={setSelectedType} />
+                {exercisesTypes && exercisesTypes.length > 0 && exercisesTypes.map(type => (
+                    <ExerciseTypeFilter key={type.type} label={type.type.charAt(0).toUpperCase() + type.type.slice(1).toLowerCase()} value={type.type} isActive={selectedType === type.type} OnClick={setSelectedType} />
                 ))}
             </ul>
-            {filteredExercises.length > 0 && (
+            {filteredExercises && filteredExercises.length > 0 && (
                 <p className="text-muted-foreground mt-4 text-sm mb-4 font-semibold uppercase tracking-tight">{filteredExercises.length} exercises</p>
             )}
             <ul className="list-none flex flex-col gap-2">
-                {filteredExercises.map(exercise => (
+                {filteredExercises && filteredExercises.length > 0 && filteredExercises.map(exercise => (
                     <ExerciseCardAdd 
                         key={exercise.id} 
                         exercise={exercise} 

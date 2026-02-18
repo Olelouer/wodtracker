@@ -1,5 +1,4 @@
 import { ExerciseWithDetails } from "@/db/schema";
-import { Flame } from "lucide-react";
 import ExerciseCard from "./ExerciseCard";
 
 const WorkoutExerciseCard = ({ exerciseWithDetails }: { exerciseWithDetails: ExerciseWithDetails }) => {
