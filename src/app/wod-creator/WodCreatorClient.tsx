@@ -50,9 +50,9 @@ const WodCreatorClient = ({ exercises, exercisesTypes }: { exercises: Exercise[]
         });
     };
 
-    const saveWorkout = async() => {
-        const result = await saveWodAction(selectedExercises);
-    }
+    const saveWorkout = async (formData: FormData) => {
+        await saveWodAction(formData, selectedExercises);
+    };
 
     return (
         <div>
