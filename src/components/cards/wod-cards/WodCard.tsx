@@ -1,7 +1,9 @@
+import Link from 'next/link';
 import { CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, Timer, Zap } from 'lucide-react';
-import {WorkoutWithExercises} from "@/db/schema";
+import { Button } from '@/components/ui/button';
+import { Calendar, Timer, Zap, Pencil } from 'lucide-react';
+import { WorkoutWithExercises } from '@/db/schema';
 import WorkoutExerciseCard from '../exercise-cards/WorkoutExerciseCard';
 import WodCardLayout from './WodCardLayout';
 
@@ -56,24 +58,30 @@ const WodCard = ({ wod }: { wod: WorkoutWithExercises }) => {
             }
             footer={
                 <>
-                    {(wod.date || (wod.workoutExercises && wod.workoutExercises.length)) && 
-                        <div className="flex items-center justify-between pt-4 w-full border-t border-border">
-                            { wod.date && 
-                                <div className="flex items-center gap--2 text-muted-foreground">
+                    <div className="flex items-center justify-between pt-4 w-full border-t border-border gap-2 flex-wrap">
+                        <div className="flex items-center gap-2">
+                            {wod.date && (
+                                <div className="flex items-center gap-2 text-muted-foreground">
                                     <Calendar className="w-4 h-4" />
-                                    <span className="text-xs ml-2 font-semibold uppercase tracking-wide">
-                                        {wod.date?.toLocaleDateString()}
+                                    <span className="text-xs font-semibold uppercase tracking-wide">
+                                        {wod.date.toLocaleDateString()}
                                     </span>
                                 </div>
-                            }
-                            { wod.workoutExercises && wod.workoutExercises.length > 0 && 
+                            )}
+                            {wod.workoutExercises && wod.workoutExercises.length > 0 && (
                                 <div className="flex items-center gap-1 text-xs text-muted-foreground">
                                     <span className="font-medium">{wod.workoutExercises.length}</span>
                                     <span className="text-xs font-semibold uppercase tracking-wide">exercises</span>
                                 </div>
-                            }
+                            )}
                         </div>
-                    }
+                        <Button variant="outline" size="sm" asChild>
+                            <Link href={`/wod/${wod.id}/edit`} className="gap-1.5">
+                                <Pencil className="w-3.5 h-3.5" />
+                                Edit
+                            </Link>
+                        </Button>
+                    </div>
                 </>
             }
         >

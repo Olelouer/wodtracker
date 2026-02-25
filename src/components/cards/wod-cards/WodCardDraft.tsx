@@ -27,6 +27,11 @@ interface WodCardDraftProps {
     updateExerciseData: (exercisePickedDate: Date, field: string, value: number) => void;
     removeSelectedExercise: (exercisePickedDate: Date) => void;
     reorderExercises: (fromIndex: number, toIndex: number) => void;
+    initialTitle?: string;
+    initialType?: string;
+    initialDuration?: number | null;
+    initialIsRx?: boolean;
+    initialDate?: string;
 }
 
 const WodCardDraft = ({
@@ -35,11 +40,17 @@ const WodCardDraft = ({
     updateExerciseData,
     removeSelectedExercise,
     reorderExercises,
+    initialTitle,
+    initialType,
+    initialDuration,
+    initialIsRx = true,
+    initialDate,
 }: WodCardDraftProps) => {
     const [dropIndicatorIndex, setDropIndicatorIndex] = useState<number | null>(null);
     const dragFromIndexRef = useRef<number | null>(null);
 
     const today = new Date().toISOString().slice(0, 10);
+    const dateValue = initialDate ?? today;
 
     return (
         <WodCardLayout
@@ -56,13 +67,12 @@ const WodCardDraft = ({
                                     <Zap className="w-8 h-8" />
                                     <Select
                                         name="type"
-                                            required
+                                        required
+                                        defaultValue={initialType ?? 'AMRAP'}
                                     >
                                         <SelectTrigger
                                             name="type"
-                                            
                                             className="text-brand font-bold text-sm tracking-wider outline-none cursor-pointer focus:ring-0 h-auto"
-                                            defaultValue="AMRAP"
                                         >
                                             <SelectValue placeholder="Select workout type" />
                                         </SelectTrigger>
@@ -81,6 +91,7 @@ const WodCardDraft = ({
                                     name="title"
                                     type="text"
                                     placeholder="Workout title"
+                                    defaultValue={initialTitle}
                                     className="text-2xl font-black tracking-tight focus-visible:ring-0 bg-transparent placeholder:text-muted-foreground"
                                 />
                             </CardTitle>
@@ -96,7 +107,7 @@ const WodCardDraft = ({
                                 type="checkbox"
                                 name="isRx"
                                 value="on"
-                                defaultChecked
+                                defaultChecked={initialIsRx}
                                 className="sr-only"
                             />
                             RX
@@ -109,6 +120,7 @@ const WodCardDraft = ({
                             type="number"
                             placeholder="Duration"
                             min={0}
+                            defaultValue={initialDuration ?? ''}
                             className="w-20 h-8"
                         />
                         <span className="text-sm font-medium"> min</span>
@@ -195,7 +207,7 @@ const WodCardDraft = ({
                         <Input
                             name="date"
                             type="date"
-                            defaultValue={today}
+                            defaultValue={dateValue}
                             className="font-semibold tracking-wide"
                         />
                     </div>

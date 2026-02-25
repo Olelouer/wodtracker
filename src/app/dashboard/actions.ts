@@ -49,6 +49,27 @@ export async function syncUser() {
     return activeUser.id;
 }
 
+export async function getWodById(id: number) {
+    const checkUserResult = await checkUser();
+    if (!checkUserResult.success) return null;
+
+    try {
+        return await db.query.workouts.findFirst({
+            where: and(eq(workouts.id, id), eq(workouts.userId, checkUserResult.user!.id)),
+            with: {
+                workoutExercises: {
+                    with: {
+                        exercise: true,
+                    },
+                },
+            },
+        });
+    } catch (e) {
+        console.error(e);
+        return null;
+    }
+}
+
 export async function deleteWod(wodId: number) {
     const checkUserResult = await checkUser();
     if(!checkUserResult.success) return checkUserResult;

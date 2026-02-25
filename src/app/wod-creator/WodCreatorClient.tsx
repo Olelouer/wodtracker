@@ -24,20 +24,20 @@ const WodCreatorClient = ({ exercises, exercisesTypes }: { exercises: Exercise[]
     }
 
     const removeSelectedExercise = (exercisePickedDate: Date) => {
-        setSelectedExercises(selectedExercises.filter(selectedExercise => {
-            const deletedExercise = exercisePickedDate.getTime() === selectedExercise.createdAt.getTime();
-            return !deletedExercise;
-        }));
+        setSelectedExercises((prev) => 
+            prev.filter((ex) => ex.createdAt.getTime() != exercisePickedDate.getTime())
+        )
     }
 
     const updateExercise = (exercisePickedDate: Date, field: string, value: number) => {
-        const newSelectedExercises = selectedExercises.map(exercise => {
-           if (exercisePickedDate.getTime() === exercise.createdAt.getTime()) {
-               return {...exercise, [field]: value};
-           }
-           return exercise;
-        });
-        setSelectedExercises(newSelectedExercises);
+        setSelectedExercises((prev) => 
+            prev.map((ex) => {
+                if(ex.createdAt.getTime() === exercisePickedDate.getTime()) {
+                    return {...ex, [field]: value}
+                }
+                return ex;
+            })
+        );
     }
 
     const reorderExercises = (fromIndex: number, toIndex: number) => {

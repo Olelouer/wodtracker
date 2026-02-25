@@ -3,6 +3,14 @@ import { Button } from '../ui/button';
 import { Plus } from 'lucide-react';
 import WodCardDraft from '../cards/wod-cards/WodCardDraft';
 
+export interface InitialWorkout {
+    title?: string | null;
+    type?: string | null;
+    duration?: number | null;
+    isRx?: boolean | null;
+    date?: Date | null;
+}
+
 interface PickedWorkoutExercises {
     workoutExercisesDraft: WorkoutExerciseDraft[];
     exercises: Exercise[];
@@ -10,8 +18,9 @@ interface PickedWorkoutExercises {
     removeSelectedExercise: (exercisePickedDate: Date) => void;
     reorderExercises: (fromIndex: number, toIndex: number) => void;
     saveWorkout: (formData: FormData) => void;
+    initialWorkout?: InitialWorkout | null;
 }
-const WodForm = ({ workoutExercisesDraft, exercises, updateExerciseData, removeSelectedExercise, reorderExercises, saveWorkout }: PickedWorkoutExercises) => {
+const WodForm = ({ workoutExercisesDraft, exercises, updateExerciseData, removeSelectedExercise, reorderExercises, saveWorkout, initialWorkout }: PickedWorkoutExercises) => {
     
 
     return (
@@ -24,12 +33,17 @@ const WodForm = ({ workoutExercisesDraft, exercises, updateExerciseData, removeS
                         saveWorkout(new FormData(e.currentTarget));
                     }}
                 >
-                    <WodCardDraft 
-                        workoutExercisesDraft={workoutExercisesDraft} 
-                        exercises={exercises} 
-                        updateExerciseData={updateExerciseData} 
-                        removeSelectedExercise={removeSelectedExercise} 
-                        reorderExercises={reorderExercises} 
+                    <WodCardDraft
+                        workoutExercisesDraft={workoutExercisesDraft}
+                        exercises={exercises}
+                        updateExerciseData={updateExerciseData}
+                        removeSelectedExercise={removeSelectedExercise}
+                        reorderExercises={reorderExercises}
+                        initialTitle={initialWorkout?.title ?? undefined}
+                        initialType={initialWorkout?.type ?? undefined}
+                        initialDuration={initialWorkout?.duration ?? undefined}
+                        initialIsRx={initialWorkout?.isRx ?? true}
+                        initialDate={initialWorkout?.date ? new Date(initialWorkout.date).toISOString().slice(0, 10) : undefined}
                     />
                     <Button type="submit" className="cursor-pointer text-lg font-semibold mx-4 mt-4">Save Wod</Button>
                 </form>
